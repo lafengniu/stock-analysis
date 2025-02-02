@@ -8,9 +8,12 @@ def get_market_data():
     index_df = ak.stock_zh_index_daily(symbol="sh000001")  # 上证指数
     return df, index_df
 
-# 调用函数并打印结果
+# 调用函数并获取数据
 market_data, index_data = get_market_data()
-print("沪深京A股行情：")
-print(market_data.head())  # 打印前5行数据
-print("\n上证指数历史数据：")
-print(index_data.head())  # 打印前5行数据
+
+# 筛选涨幅在9.98%以上的股票
+high_gain_stocks = market_data[market_data['涨跌幅'] >= 9.98]
+
+# 打印结果
+print("涨幅在9.98%以上的股票：")
+print(high_gain_stocks)
